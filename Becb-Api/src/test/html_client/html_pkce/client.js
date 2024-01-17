@@ -3,7 +3,7 @@ const config = {
     clientSecret: "xpto",
     authorizeUrl: "http://auth.local:8082/oauth/authorize",
     tokenUrl: "http://auth.local:8082/oauth/token",
-    callbackUrl: "http://localhost:9000/html_pkce/index_pkce.html",
+    callbackUrl: "http://localhost:8000/html_pkce/index_pkce.html",
     helloUrl: "http://localhost:8080/hello"
 };
 

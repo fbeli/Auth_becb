@@ -4,7 +4,7 @@ const config = {
     clientSecret: "xpto",
     authorizeUrl: "http://auth.local:8082/oauth/authorize",
     tokenUrl: "http://auth.local:8082/oauth/token",
-    callbackUrl: "http://localhost:9000/index.html",
+    callbackUrl: "http://localhost:8000/index.html",
     helloUrl: "http://localhost:8080/hello",
     const_username: 'frederico',
     const_password: '123',
