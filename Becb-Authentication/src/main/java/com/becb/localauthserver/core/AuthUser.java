@@ -1,9 +1,7 @@
 package com.becb.localauthserver.core;
 
-
-
 import java.util.Collection;
-import java.util.Collections;
+import java.util.logging.Logger;
 
 import com.becb.localauthserver.domain.Usuario;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +13,7 @@ import lombok.Getter;
 @Getter
 public class AuthUser extends User {
 
+    private static final Logger logger = Logger.getLogger(AuthUser.class.getName());
     private static final long serialVersionUID = 1L;
     private Long userId;
     private String fullName;
@@ -25,6 +24,7 @@ public class AuthUser extends User {
 
         this.fullName = usuario.getName();
         this.userId = usuario.getId();
+        logger.info("Login do usuário:  "+usuario.getEmail());
     }
 
 }
