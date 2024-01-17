@@ -4,18 +4,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecutityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecutityConfig extends WebSecurityConfigurerAdapter {
+
+    /* para testes em memória
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,7 +28,7 @@ public class WebSecutityConfig extends WebSecurityConfigurerAdapter{
                 .withUser("joao")
                 .password(passwordEncoder().encode("123"))
                 .roles("ADMIN");
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,19 +41,21 @@ public class WebSecutityConfig extends WebSecurityConfigurerAdapter{
         return super.authenticationManager();
     }
 
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return super.userDetailsService();
-    }
+    /* usado para usuáris em memória
 
+    @Bean
+     @Override
+     protected UserDetailsService userDetailsService() {
+         return super.userDetailsService();
+     }
+ */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/oauth/token").permitAll()
-                .antMatchers(HttpMethod.GET,"/oauth/check_token").permitAll()
+                .antMatchers(HttpMethod.GET, "/oauth/token").permitAll()
+                .antMatchers(HttpMethod.GET, "/oauth/check_token").permitAll()
                 .antMatchers("/**").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()

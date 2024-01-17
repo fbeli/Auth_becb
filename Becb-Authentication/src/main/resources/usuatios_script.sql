@@ -1,6 +1,7 @@
 
+use auth;
 -- Create table for users information
-    CREATE TABLE users (
+    CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -15,5 +16,5 @@
     city VARCHAR(50) NOT NULL,
     state VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES usuario(id)
     );
