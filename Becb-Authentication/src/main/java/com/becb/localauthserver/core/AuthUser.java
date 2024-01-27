@@ -1,6 +1,8 @@
 package com.becb.localauthserver.core;
 
 import java.util.Collection;
+import java.util.UUID;
+
 import com.becb.localauthserver.domain.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,7 @@ public class AuthUser extends User {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthUser.class);
     private static final long serialVersionUID = 1L;
-    private Long userId;
+    private UUID userId;
     private String fullName;
 
 
@@ -24,6 +26,8 @@ public class AuthUser extends User {
 
         this.fullName = usuario.getName();
         this.userId = usuario.getId();
+
+
         logger.info("Login do usuário:  "+usuario.getEmail());
     }
 

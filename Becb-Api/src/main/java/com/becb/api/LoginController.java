@@ -3,8 +3,6 @@ package com.becb.api;
 import com.becb.api.security.AuthSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +14,6 @@ public class LoginController   {
 
 	@Autowired
 	AuthSecurity authSecurity;
-
-
 
 	@PreAuthorize("hasAuthority('HELLO')")
 	@GetMapping("/hello")
@@ -39,6 +35,7 @@ public class LoginController   {
 		return "autorizado, "+authSecurity.getName();
 	}
 	@GetMapping("/config")
+
 	@ResponseBody
 	public String config() {
 		return "{ \"nome\": \"Fulano de Tal\", \"idade\": 30, \"endereco\": \"Rua Exemplo, 123\", \"telefone\": \"(00) 1234-5678\" }";
