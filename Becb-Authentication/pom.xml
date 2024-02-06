@@ -61,6 +61,7 @@
             <version>${spring-security-jwt.version}</version>
         </dependency>
 
+
     </dependencies>
 
     <build>

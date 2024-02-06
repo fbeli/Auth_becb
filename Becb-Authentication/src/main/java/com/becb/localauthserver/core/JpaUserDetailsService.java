@@ -1,5 +1,7 @@
 package com.becb.localauthserver.core;
 
+import com.becb.localauthserver.domain.Grupo;
+import com.becb.localauthserver.domain.GrupoRepository;
 import com.becb.localauthserver.domain.Usuario;
 import com.becb.localauthserver.domain.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -31,6 +34,8 @@ public class JpaUserDetailsService implements UserDetailsService {
     }
 
     private Collection<GrantedAuthority> getAuthorities(Usuario usuario) {
+
+
         return usuario.getGrupos().stream()
                 .flatMap(grupo -> grupo.getPermissoes().stream())
                 .map(permissao -> new SimpleGrantedAuthority(permissao.getNome().toUpperCase()))

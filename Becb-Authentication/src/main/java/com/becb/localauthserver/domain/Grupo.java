@@ -3,21 +3,17 @@ package com.becb.localauthserver.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@Setter
+@Getter
+@Table(name = "grupo")
 public class Grupo {
 
     @EqualsAndHashCode.Include
@@ -28,9 +24,14 @@ public class Grupo {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToMany
+   @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "grupo_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     private Set<Permissao> permissoes = new HashSet<>();
+
+
+
+    @ManyToMany(mappedBy = "grupos")
+    private Set<Usuario> users = new HashSet<>();
 
 }

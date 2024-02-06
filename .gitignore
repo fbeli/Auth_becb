@@ -25,4 +25,5 @@ replay_pid*
 
 mysql/*
 */mysql/*
+/Becb-Authentication/mysql/*
 .idea/*

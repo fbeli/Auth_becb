@@ -26,7 +26,8 @@ public class UserController {
             cadastroResponse.setErro(e.getMessage());
             response.setStatus(HttpServletResponse.SC_CONFLICT);
         }catch (Exception e) {
-            if(e.getCause().getCause().getMessage().startsWith("Duplicate")){
+            if(e.getCause().getCause().getMessage() != null && e.getCause().getCause().getMessage().startsWith(
+                    "Duplicate")){
                 cadastroResponse.setErro("user already exists");
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
             }else {

@@ -1,17 +1,10 @@
 package com.becb.localauthserver.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
@@ -19,15 +12,16 @@ import java.util.Set;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@Table(name = "usuarios")
 public class Usuario {
 
-    @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(generator = "uuid-hibernate-generator")
-    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
+
 
     @Column(nullable = false)
     private String name;
@@ -43,9 +37,19 @@ public class Usuario {
     private String telefone;
 
 
-    @ManyToMany
-    @JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_group",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
     private Set<Grupo> grupos = new HashSet<>();
+
+    public void addGrupo(Grupo grupo){
+        if(grupos == null){
+            grupos = new HashSet<>();
+        }
+        this.grupos.add(grupo);
+    }
 
 }
