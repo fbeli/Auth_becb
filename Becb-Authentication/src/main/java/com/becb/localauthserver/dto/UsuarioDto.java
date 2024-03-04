@@ -24,7 +24,8 @@ public class UsuarioDto extends Usuario {
         usuario.setCountry(getCountry());
         usuario.setTelefone(getTelefone());
         usuario.setDescription(getDescription());
-
+        usuario.setInstagram(getInstagram());
+        usuario.setGrupos(getGrupos());
         return usuario;
 
     }
@@ -42,6 +43,8 @@ public class UsuarioDto extends Usuario {
             this.setGuide(usuario.getGuide());
             this.setInstagram(usuario.getInstagram());
             this.setDescription(usuario.getDescription());
+            this.setGrupos(usuario.getGrupos());
+
         }
     }
 

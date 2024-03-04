@@ -24,7 +24,7 @@ public class UserController {
     @PostMapping("/cadastro")
     public CadastroUsuarioResponse cadastroUsuario(@RequestBody UsuarioDto usuario, HttpServletResponse response) {
 
-        logger.info("Receiving new user: {}"+usuario.toString());
+        logger.info("Receiving new user: {}", usuario.toString());
         CadastroUsuarioResponse cadastroResponse = new CadastroUsuarioResponse();
 
         try{
@@ -51,8 +51,8 @@ public class UserController {
         return "true";
     }
 
-    @GetMapping("/user/{id}")
-    public UsuarioDto getUser(@RequestParam String id) {
+    @GetMapping("/user/get_by_id/{id}")
+    public UsuarioDto getUser(@PathVariable String id) {
 
         Usuario user = usuarioService.findById(UUID.fromString(id));
         UsuarioDto dto = null;
@@ -63,7 +63,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/{email}")
+    @GetMapping("/user/get_by_email/")
     public UsuarioDto getUserByEmail(@RequestParam String email) {
 
         Usuario user = usuarioService.findByEmail(email);

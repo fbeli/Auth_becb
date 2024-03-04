@@ -26,12 +26,13 @@ public class UsuarioService {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         usuarioDto.setPassword(encoder.encode( usuarioDto.getPassword()));
+
         return usuarioRepository.save(convertToEntity(usuarioDto));
     }
 
     private Usuario convertToEntity(UsuarioDto usuarioDto) {
 
-        Grupo grupo = new Grupo();
+
 
         if (usuarioDto.getGrupoId() == null){
                 if( usuarioDto.getGuide())
@@ -40,10 +41,11 @@ public class UsuarioService {
                     usuarioDto.setGrupoId("1");
         }
 
-        grupo = grupoRepository.findById(Long.parseLong(usuarioDto.getGrupoId())).orElse(null);
+        Grupo grupo = grupoRepository.findById(Long.parseLong(usuarioDto.getGrupoId())).orElse(null);
         usuarioDto.setGrupos(new HashSet<>());
         usuarioDto.addGrupo(grupo);
-
+        assert grupo != null;
+        grupo.addUser(usuarioDto.getUser());
         return usuarioDto.getUser();
     }
 

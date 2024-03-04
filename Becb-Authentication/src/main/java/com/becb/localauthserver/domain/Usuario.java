@@ -5,6 +5,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +22,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Data
 @Entity
 @Table(name = "usuarios")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Usuario {
 
     @Id
@@ -38,11 +42,13 @@ public class Usuario {
 
     @Column(nullable = false)
     private String password;
+
     @Column
     private String telefone;
 
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinTable(
             name = "user_group",
             joinColumns = @JoinColumn(name = "user_id"),
