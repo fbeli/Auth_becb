@@ -15,7 +15,7 @@
     <description>Authorization Server</description>
     <properties>
         <java.version>11</java.version>
-        <spring-security-oauth2.version>2.3.7.RELEASE</spring-security-oauth2.version>
+        <spring-security-oauth2.version>2.5.2.RELEASE</spring-security-oauth2.version>
         <spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
     </properties>
     <dependencies>
@@ -43,6 +43,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+            <version> 1.18.10</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
@@ -54,12 +55,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
             <version>${spring-security-jwt.version}</version>
         </dependency>
+
 
 
     </dependencies>

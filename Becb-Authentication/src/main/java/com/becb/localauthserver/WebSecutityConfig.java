@@ -56,6 +56,7 @@ public class WebSecutityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/oauth/token").permitAll()
                 .antMatchers(HttpMethod.GET, "/oauth/check_token").permitAll()
+                .antMatchers(HttpMethod.GET, "/health").permitAll()
                 .antMatchers("/**").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()

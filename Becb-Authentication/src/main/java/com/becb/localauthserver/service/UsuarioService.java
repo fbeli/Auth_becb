@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsuarioService {
@@ -30,21 +30,30 @@ public class UsuarioService {
     }
 
     private Usuario convertToEntity(UsuarioDto usuarioDto) {
-        Usuario usuario = new Usuario();
-        usuario.setEmail(usuarioDto.getEmail());
-        usuario.setName(usuarioDto.getName());
-        usuario.setPassword(usuarioDto.getPassword());
+
         Grupo grupo = new Grupo();
 
-        if (usuarioDto.getGrupoId() == null) {
-            usuarioDto.setGrupoId("2");
+        if (usuarioDto.getGrupoId() == null){
+                if( usuarioDto.getGuide())
+                    usuarioDto.setGrupoId("2");
+                else
+                    usuarioDto.setGrupoId("1");
         }
-            grupo = grupoRepository.findById(Long.parseLong(usuarioDto.getGrupoId())).orElse(null);
-            usuario.setGrupos(new HashSet<>());
-            usuario.addGrupo(grupo);
 
-        return usuario;
+        grupo = grupoRepository.findById(Long.parseLong(usuarioDto.getGrupoId())).orElse(null);
+        usuarioDto.setGrupos(new HashSet<>());
+        usuarioDto.addGrupo(grupo);
+
+        return usuarioDto.getUser();
     }
+
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email).orElse(null);
+    }
+    public Usuario findById(UUID id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
 
 
 }
