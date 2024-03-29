@@ -13,6 +13,9 @@ public class UsuarioDto extends Usuario {
 
     @JsonIgnore
     public  Usuario getUser(){
+
+        fixInstagram();
+        
         Usuario usuario = new Usuario();
         usuario.setEmail(getEmail());
         usuario.setPassword(getPassword());
@@ -27,7 +30,14 @@ public class UsuarioDto extends Usuario {
         usuario.setInstagram(getInstagram());
         usuario.setGrupos(getGrupos());
         return usuario;
-
+    }
+    private void fixInstagram(){
+        if(getInstagram() != null){
+            if(!getInstagram().contains("@"))
+                setInstagram("@"+getInstagram());
+        } else {
+            setInstagram("@");
+        }
     }
     public UsuarioDto() {}
 
