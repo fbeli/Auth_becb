@@ -1,9 +1,7 @@
 package com.becb.localauthserver.core;
 
-import com.becb.localauthserver.domain.Grupo;
-import com.becb.localauthserver.domain.GrupoRepository;
 import com.becb.localauthserver.domain.Usuario;
-import com.becb.localauthserver.domain.UsuarioRepository;
+import com.becb.localauthserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +32,6 @@ public class JpaUserDetailsService implements UserDetailsService {
     }
 
     private Collection<GrantedAuthority> getAuthorities(Usuario usuario) {
-
 
         return usuario.getGrupos().stream()
                 .flatMap(grupo -> grupo.getPermissoes().stream())

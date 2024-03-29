@@ -1,6 +1,8 @@
 package com.becb.localauthserver.controller;
 
+import com.becb.localauthserver.domain.ResetRequest;
 import com.becb.localauthserver.domain.Usuario;
+import com.becb.localauthserver.dto.ResetRequestDto;
 import com.becb.localauthserver.dto.UsuarioDto;
 import com.becb.localauthserver.service.UsuarioService;
 import org.slf4j.Logger;
@@ -63,8 +65,8 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/get_by_email/")
-    public UsuarioDto getUserByEmail(@RequestParam String email) {
+    @GetMapping("/user/get_by_email/{email}")
+    public UsuarioDto getUserByEmail(@PathVariable String email) {
 
         Usuario user = usuarioService.findByEmail(email);
         UsuarioDto dto = null;
@@ -75,4 +77,19 @@ public class UserController {
 
     }
 
+    @PostMapping("/user/reset_create_code")
+    public String resetRequestCode(@RequestBody ResetRequestDto resetDto) {
+        logger.info("Received request code: {}", resetDto.toString());
+        ResetRequest resetRequest = new ResetRequest(resetDto.getEmail(), resetDto.getCode());
+        usuarioService.saveToReset(resetRequest);
+        return "success";
+    }
+
+    @PutMapping("/user/reset_password")
+    public ResetRequestDto resetResetPassword(@RequestBody ResetRequestDto resetDto) {
+        logger.info("Received reset request: {}", resetDto.toString());
+
+        return usuarioService.changePassword(resetDto);
+
+    }
 }

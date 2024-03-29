@@ -19,6 +19,10 @@ public class AuthUser extends User {
     private static final long serialVersionUID = 1L;
     private UUID userId;
     private String fullName;
+    private String email;
+    private Boolean share;
+    private Boolean guide;
+    private String instagram;
 
 
     public AuthUser(Usuario usuario, Collection<? extends GrantedAuthority> authorities) {
@@ -26,6 +30,11 @@ public class AuthUser extends User {
 
         this.fullName = usuario.getName();
         this.userId = usuario.getId();
+        this.share = usuario.getShare();
+        this.email = usuario.getEmail();
+        this.guide = usuario.getGuide();
+        this.instagram = usuario.getInstagram();
+
 
 
         logger.info("Login do usuário:  "+usuario.getEmail());

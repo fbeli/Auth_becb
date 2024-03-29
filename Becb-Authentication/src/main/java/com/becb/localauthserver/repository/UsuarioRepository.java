@@ -1,14 +1,10 @@
-package com.becb.localauthserver.domain;
+package com.becb.localauthserver.repository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import com.becb.localauthserver.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

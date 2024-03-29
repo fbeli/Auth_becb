@@ -8,8 +8,6 @@ import java.util.UUID;
 @Getter @Setter
 public class CadastroUsuarioResponse {
 
-
-
     String erro;
     UUID id;
 

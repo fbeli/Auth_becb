@@ -19,6 +19,11 @@ public class JwtCustomClaimsTokenEnhancer implements TokenEnhancer {
             var info = new HashMap<String, Object>();
             info.put("nome_completo", authUser.getFullName());
             info.put("usuario_id", authUser.getUserId());
+            info.put("usuario_email", authUser.getEmail());
+            info.put("share", authUser.getShare());
+            info.put("usuario_instagram", authUser.getInstagram());
+            info.put("guide", authUser.getGuide());
+
 
             var oAuth2AccessToken = (DefaultOAuth2AccessToken) accessToken;
             oAuth2AccessToken.setAdditionalInformation(info);

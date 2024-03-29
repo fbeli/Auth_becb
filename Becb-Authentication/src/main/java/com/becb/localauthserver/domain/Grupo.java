@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +25,7 @@ public class Grupo {
     private String nome;
 
    @ManyToMany(fetch = FetchType.LAZY)
+   @JsonBackReference
     @JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "grupo_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     private Set<Permissao> permissoes = new HashSet<>();
@@ -32,6 +33,12 @@ public class Grupo {
 
 
     @ManyToMany(mappedBy = "grupos")
-    private Set<Usuario> users = new HashSet<>();
+    @JsonBackReference
+    private Set<Usuario> users;
 
+    public void addUser(Usuario usuario) {
+        if(users == null)
+            users = new HashSet<>();
+        users.add(usuario);
+    }
 }

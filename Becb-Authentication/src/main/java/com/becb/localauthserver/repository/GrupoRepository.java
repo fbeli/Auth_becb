@@ -1,5 +1,6 @@
-package com.becb.localauthserver.domain;
+package com.becb.localauthserver.repository;
 
+import com.becb.localauthserver.domain.Grupo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
